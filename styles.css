@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    background-color: #2A3441;
+}
+
+p, h3, h1 {
+    color: #ffffff;
+}
+
+.flex-container {
+    background-color: #445469;
+    display: flex;
+    flex-direction: column;
+}
+
+.intro {
+    padding: 0px 20px 0px 20px;
+}
+
+.row {
+    background-color: #2A3441;
+    font-size: 18px;
+    width: 800px;
+    max-width: 800px;
+    min-width: 400px;
+    height: auto;
+
+    margin: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row_title {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.inputs {
+    flex-direction: row;
+    justify-content: space-around;
+
+    padding: 0px 20px 0px 20px;
+}
+
+/* Estilos de los elementos de cada fila */
+
+.code_word {
+    width: 60px;
+
+    padding: 0px 5px 0px 5px;
+
+    font-weight: bold;
+    color: red;
+
+    justify-content: center;
+}
+
+.description {
+    width: 500px;
+
+    padding: 0px 5px 0px 5px;
+
+    justify-content: left;
+}
+
+.value {
+    width: 170px;
+
+    padding: 0px 5px 0px 5px;
+
+    justify-content: center;
+}
+
+
+/* Botones */
+
+.buttons {
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.buttons > button {
+    width: 200px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#output {
+    width: 400px;
+}
+
+/* Estilos */
+
+.border {
+    border-radius: 10px;
+}
+
+/* Estilo de mensaje de error */
+
+.error_msg {
+    background-color: #FA5B56;
+}
+
+.disable {
+    display: none;
+}

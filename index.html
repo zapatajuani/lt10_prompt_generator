@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <title>LT-10 Prompter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="flex-container border">
+        
+        <!-- Titulo -->
+        <div class="row border">
+            <h1>LT-10 Prompter</h1>
+            <p class="intro">Most behaviors of LT-10 could be changed by Configuration Parameters. 
+                You could change the setting of configuration parameters by GlobalSat 
+                Configuration App or by sending downlink command.</p>
+        </div>
+
+        <!-- Device -->
+        <div class="row border">
+            <h3 class="row_title">Device</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">O4</p>
+                <p class="description">Power on operating mode</p>
+                <select onchange="enCambio(this)" class="value" name="04" id="operation_mode" title="operation_mode">
+                    <option value="2" selected>2 = Periodic</option>
+                    <option value="4">4 = Motion</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Other Settings -->
+        <div class="row border">
+            <h3 class="row_title">Other Settings</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">Gt</p>
+                <p class="description">G-sensor sensitivity for motion detection</p>
+                <select onchange="enCambio(this)" class="value" name="Gt" id="g_sensor" title="g_sensor">
+                    <option value="5">5 = high</option>
+                    <option value="10" selected>10 = medium</option>
+                    <option value="25">25 = low</option>
+                </select>
+            </div>
+
+            <div class="row border inputs">
+                <p class="code_word">O1</p>
+                <p class="description">Interval for triggering motion sensor</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text"
+                name="O1"
+                id="interval_for_motion"
+                placeholder="1 to 100">
+            </div>
+
+            <span id="interval_for_motion_error" class="row inputs error_msg disable">
+                Valor incorrecto. O1 debe estar entre 1 ~ 100
+            </span>
+
+            <div class="row border inputs">
+                <p class="code_word">Z5</p>
+                <p class="description">Device Security Key for App (8 char long)</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text" name="Z5"
+                id="password"
+                placeholder="ex 0000000">
+            </div>
+
+            <span id="password_error" class="row inputs error_msg disable">
+                Valor incorrecto. Longitud maxima de 8 caracteres
+            </span>
+
+            <div class="row border inputs">
+                <p class="code_word">Z6</p>
+                <p class="description">SPM (Smart Power Management Level)</p>
+                <select onchange="enCambio(this)" class="value" name="Z6" id="spm" title="spm">
+                    <option value="0">0 = disable</option>
+                    <option value="1" selected>1 = enable</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- GPS -->
+        <div class="row border">
+            <h3 class="row_title">GPS</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">CD</p>
+                <p class="description">enable/disable GPS</p>
+                <select onchange="enCambio(this)" class="value" name="CD" id="gps_state" title="gps_state">
+                    <option value="0">0 = disable</option>
+                    <option value="1" selected>1 = enable</option>
+                </select>
+            </div>
+
+            <div class="row border inputs">
+                <p class="code_word">C1</p>
+                <p class="description">The time to get GPS-fix if LT-10 got GPS-fix 
+                    over 1 hour ago</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)" 
+                type="text"
+                name="C1"
+                id="gps_fix_A"
+                placeholder="from 30 to 600">
+            </div>
+
+            <span id="gps_fix_A_error" class="row inputs error_msg disable">
+                Valor incorrecto. C1 debe estar entre 30 ~ 600
+            </span>
+
+            <div class="row border inputs">
+                <p class="code_word">C2</p>
+                <p class="description">The time to get GPS-fix if LT-10 LT-10 got GPS-fix 
+                    within 1 hour</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text"
+                name="C2"
+                id="gps_fix_B"
+                placeholder="default 40 secs">
+            </div>
+
+            <span id="gps_fix_B_error" class="row inputs error_msg disable">
+                Valor incorrecto. C2 debe estar entre 10 ~ 120
+            </span>
+
+        </div>
+
+        <!-- Communication -->
+        <div class="row border">
+            <h3 class="row_title">Communication</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">A1</p>
+                <p class="description">Wait confirmation from gateway after sending message 
+                    to gateway</p>
+                <select onchange="enCambio(this)" class="value" name="A1" id="confirmation_state" title="confirmation_state">
+                    <option value="0" selected>0 = disable</option>
+                    <option value="1">1 = enable</option>
+                </select>
+            </div>
+
+            <div class="row border inputs">
+                <p class="code_word">A6</p>
+                <p class="description">Number of re-sending reports without getting ACK 
+                    from gateway</p>
+                <select onchange="enCambio(this)" class="value" name="A6" id="re_sending_messages" title="re_sending_messages">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Tracking -->
+        <div class="row border">
+            <h3 class="row_title">Tracking - Period</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">P0</p>
+                <p class="description">Report interval of period report</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text"
+                name="P0"
+                id="period_interval"
+                placeholder="Gt 600 secs">
+            </div>
+
+            <span id="period_interval_error" class="row inputs error_msg disable">
+                Valor incorrecto. El valor debe ser mayor a 600
+            </span>
+
+            <h3 class="row_title">Tracking - Motion</h3>
+
+            <div class="row border inputs">
+                <p class="code_word">R0</p>
+                <p class="description">Report interval in static state</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text"
+                name="R0"
+                id="static_interval"
+                placeholder="Gt 600 secs">
+            </div>
+
+            <span id="static_interval_error" class="row inputs error_msg disable">
+                Valor incorrecto. El valor debe ser mayor a 600
+            </span>
+
+            <div class="row border inputs">
+                <p class="code_word">R1</p>
+                <p class="description">Report interval in moving state</p>
+                <input class="value"
+                autocomplete="off"
+                onchange="enCambio(this)"
+                type="text"
+                name="R1"
+                id="motion_interval"
+                placeholder="Gt 600 secs">
+            </div>
+
+            <span id="motion_interval_error" class="row inputs error_msg disable">
+                Valor incorrecto. El valor debe ser mayor a 600
+            </span>
+
+        </div>
+
+        <!-- Output -->
+        <div class="row border">
+            <h3 class="row_title">Output</h3>
+
+            <div class="row border inputs">
+                <input type="text"
+                autocomplete="off"
+                name="output"
+                id="output"
+                placeholder="Hex string command">
+            </div>
+
+            <div class="row border inputs buttons">
+                <button onclick="generator()">Generate</button>
+                <button onclick="copiar()" id="copy_btn">Copiar</button>
+            </div>
+            
+        </div>
+
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
